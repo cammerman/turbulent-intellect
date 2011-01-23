@@ -15,10 +15,7 @@ namespace HelloSvc.Greeting
 
 		protected virtual String Filename()
 		{
-			return
-				Path.Combine(
-					Environment.GetFolderPath(Environment.SpecialFolder.Desktop),
-					"hello.txt");
+			return @"c:\greetings\hello.txt";
 		}
 
 		protected virtual FileStream OpenFile()
