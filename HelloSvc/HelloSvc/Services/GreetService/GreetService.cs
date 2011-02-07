@@ -6,27 +6,28 @@ using System.ServiceProcess;
 
 namespace HelloSvc.Services
 {
+	using Config;
+
 	internal class GreetService : ServiceBase
 	{
-		protected Greeting.IGreeter Greeter
+		public GreetService(IServiceNameProvider serviceNameProvider)
 		{
-			get;
-			private set;
-		}
+			serviceNameProvider.ThrowIfNull("serviceNameProvider");
+			
+			ServiceName =
+				serviceNameProvider.ServiceName
+					.ThrowIfNullOrEmpty("serviceNameProvider.ServiceName");
 
-		public GreetService(Greeting.IGreeter greeter)
-		{
-			Greeter = greeter.ThrowIfNull("greeter");
-
-			ServiceName = "Greeter";
 			CanStop = true;
-			CanPauseAndContinue = true;
 			AutoLog = false;
 		}
 
 		protected override void OnStart(String[] args)
 		{
-			Greeter.SayHello();
+		}
+
+		protected override void OnStop()
+		{
 		}
 	}
 }

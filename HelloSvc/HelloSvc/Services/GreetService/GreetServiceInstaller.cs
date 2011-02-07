@@ -7,15 +7,22 @@ using System.ServiceProcess;
 
 namespace HelloSvc.Services
 {
+	using Config;
+
 	internal class GreetServiceInstaller : ServiceInstaller
 	{
-		public GreetServiceInstaller()
+		public GreetServiceInstaller(IServiceNameProvider serviceNameProvider)
 			: base()
 		{
-			ServiceName = "Greeter";
-			DisplayName = "Greeter";
+			serviceNameProvider.ThrowIfNull("serviceNameProvider");
+			var serviceName =
+				serviceNameProvider.ServiceName
+					.ThrowIfNullOrEmpty("serviceNameProvider.ServiceName");
+
+			ServiceName = serviceName;
+			DisplayName = serviceName;
 			Description = "Windows Services Hello World";
-			StartType = ServiceStartMode.Manual;
+			StartType = ServiceStartMode.Automatic;
 		}
 	}
 }

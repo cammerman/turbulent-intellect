@@ -3,10 +3,10 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 
-namespace HelloSvc.Greeting
+namespace HelloSvc.Config
 {
-	internal interface IGreeter
+	internal interface IServiceNameProvider
 	{
-		void SayHello();
+		String ServiceName { get; }
 	}
 }

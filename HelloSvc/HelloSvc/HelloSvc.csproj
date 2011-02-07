@@ -45,13 +45,14 @@
     <Reference Include="System.ServiceProcess" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Config\IServiceNameProvider.cs" />
+    <Compile Include="Config\ServiceNameProvider.cs" />
     <Compile Include="Extensions\Generic.ThrowHelpers.cs" />
-    <Compile Include="Greeting\FileGreeter.cs" />
-    <Compile Include="Greeting\IGreeter.cs" />
-    <Compile Include="IoC\InstallerBootstrapper.cs" />
+    <Compile Include="Extensions\StringExtensions.cs" />
+    <Compile Include="IoC\InstallBootstrapper.cs" />
     <Compile Include="IoC\ServiceBootstrapper.cs" />
     <Compile Include="Program.cs" />
-    <Compile Include="Installers\ProjectInstaller.cs">
+    <Compile Include="Install\ProjectInstaller.cs">
       <SubType>Component</SubType>
     </Compile>
     <Compile Include="Services\GreetService\GreetService.cs">
@@ -60,7 +61,7 @@
     <Compile Include="Services\GreetService\GreetServiceInstaller.cs">
       <SubType>Component</SubType>
     </Compile>
-    <Compile Include="Installers\HelloServiceProcessInstaller.cs">
+    <Compile Include="Install\HelloServiceProcessInstaller.cs">
       <SubType>Component</SubType>
     </Compile>
   </ItemGroup>
