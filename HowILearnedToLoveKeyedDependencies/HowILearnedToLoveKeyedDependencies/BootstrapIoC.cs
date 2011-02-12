@@ -16,13 +16,13 @@ namespace HowILearnedToLoveKeyedDependencies
 			
 			builder
 				.RegisterType<Cache>()
-				.Keyed<ECacheType>(ECacheType.Thumb)
+				.WithMetadata("CacheType", ECacheType.Thumb)
 				.As<ICache>()
 				.InstancePerLifetimeScope();
 			
 			builder
 				.RegisterType<Cache>()
-				.Keyed<ECacheType>(ECacheType.Image)
+				.WithMetadata("CacheType", ECacheType.Image)
 				.As<ICache>()
 				.InstancePerLifetimeScope();
 			

@@ -1,6 +1,8 @@
 using System;
+using System.Linq;
+using System.Collections.Generic;
 
-using Autofac.Features.Indexed;
+using Autofac.Features.Metadata;
 
 namespace HowILearnedToLoveKeyedDependencies
 {
@@ -18,10 +20,25 @@ namespace HowILearnedToLoveKeyedDependencies
 			private set;
 		}
 		
-		public ImageBrowser(IIndex<ECacheType, ICache> caches)
+		protected virtual Func<Meta<ICache>, Boolean> CacheTypeChecker(ECacheType cacheType)
 		{
-			ThumbCache = caches[ECacheType.Thumb];
-			ImageCache = caches[ECacheType.Image];
+			return
+				cache =>
+					cache.Metadata["CacheType"]
+						.Equals(cacheType);
+		}
+		
+		public ImageBrowser(IEnumerable<Meta<ICache>> caches)
+		{
+			ThumbCache =
+				caches
+					.First(CacheTypeChecker(ECacheType.Thumb))
+					.Value;
+			
+			ImageCache =
+				caches
+					.First(CacheTypeChecker(ECacheType.Image))
+					.Value;
 		}
 	}
 }
