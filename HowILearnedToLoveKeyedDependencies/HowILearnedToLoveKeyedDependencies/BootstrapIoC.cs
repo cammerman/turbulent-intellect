@@ -1,7 +1,6 @@
 using System;
 
 using Autofac;
-using Autofac.Core;
 
 namespace HowILearnedToLoveKeyedDependencies
 {
@@ -9,20 +8,6 @@ namespace HowILearnedToLoveKeyedDependencies
 	{
 		public BootstrapIoC ()
 		{
-		}
-		
-		protected virtual void OnPreparingImageBrowser(PreparingEventArgs e)
-		{
-			e.Parameters = new[] {
-				new NamedParameter(
-					"thumbCache",
-				    e.Context
-						.ResolveKeyed<ICache>(ECacheType.Thumb)),
-				new NamedParameter(
-				    "imageCache",
-				    e.Context
-						.ResolveKeyed<ICache>(ECacheType.Image))
-				};
 		}
 		
 		public IContainer Build()
@@ -43,7 +28,6 @@ namespace HowILearnedToLoveKeyedDependencies
 			
 			builder
 				.RegisterType<ImageBrowser>()
-				.OnPreparing(OnPreparingImageBrowser)
 				.AsSelf()
 				.InstancePerLifetimeScope();
 				

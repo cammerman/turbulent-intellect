@@ -1,4 +1,7 @@
 using System;
+
+using Autofac.Features.Indexed;
+
 namespace HowILearnedToLoveKeyedDependencies
 {
 	public class ImageBrowser
@@ -15,10 +18,10 @@ namespace HowILearnedToLoveKeyedDependencies
 			private set;
 		}
 		
-		public ImageBrowser(ICache thumbCache, ICache imageCache)
+		public ImageBrowser(IIndex<ECacheType, ICache> caches)
 		{
-			ThumbCache = thumbCache;
-			ImageCache = imageCache;
+			ThumbCache = caches[ECacheType.Thumb];
+			ImageCache = caches[ECacheType.Image];
 		}
 	}
 }
